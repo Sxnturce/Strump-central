@@ -1,4 +1,13 @@
+import { useEffect, useState } from "react";
+
 function Header({ imagen }) {
+	const [init, setInit] = useState(0);
+
+	useEffect(() => {
+		const tbody = document.querySelector("tbody").children.length;
+		setInit(tbody);
+	}, [init]);
+
 	return (
 		<>
 			<header className="py-5 header">
@@ -22,7 +31,11 @@ function Header({ imagen }) {
 								/>
 
 								<div id="carrito" className="bg-white p-3">
-									<p className="text-center"> El carrito esta vacio</p>
+									<p className="text-center">
+										{init > 0
+											? `Tienes ${init} producto(s)`
+											: "Tu carrito esta vacio U-U"}
+									</p>
 									<table className="w-100 table">
 										<thead>
 											<tr>
@@ -33,7 +46,7 @@ function Header({ imagen }) {
 												<th></th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody className="tbody">
 											<tr>
 												<td>
 													<img
